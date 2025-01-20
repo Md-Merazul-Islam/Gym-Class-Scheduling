@@ -255,6 +255,8 @@ The system uses **JWT-based authentication** to enforce role-based access:
    - API Root: [https://gym-class-scheduling-q6cx.vercel.app/](https://gym-class-scheduling-q6cx.vercel.app/)
    - Admin Panel: [https://gym-class-scheduling-q6cx.vercel.app/admin/](https://gym-class-scheduling-q6cx.vercel.app/admin/)
 
+8. Swagger API Documents:
+   - API Live : [https://gym-class-scheduling-q6cx.vercel.app/swagger/](https://gym-class-scheduling-q6cx.vercel.app/swagger/)
 
 
 Enjoy managing your gym efficiently with this system!
