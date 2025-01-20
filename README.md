@@ -114,7 +114,7 @@ GYM/  # Project Root
 |-------------|--------------|---------------|
 | **Superuser** | admin      | admin1234     |
 | **Admin**     | meraz      | meraz2004     |
-| **Trainer**   | sagor      | meraz2004     |
+| **Trainer**   | saim      | meraz2004     |
 | **Trainee**   | antor      | meraz2004     |
 
 
