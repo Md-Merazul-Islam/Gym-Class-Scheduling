@@ -257,6 +257,7 @@ The system uses **JWT-based authentication** to enforce role-based access:
 
 8. Swagger API Documents:
    - API Live : [https://gym-class-scheduling-q6cx.vercel.app/swagger/](https://gym-class-scheduling-q6cx.vercel.app/swagger/)
-
+9. You can error type :
+    - Error : [https://github.com/Md-Merazul-Islam/test/blob/main/README2.md](https://github.com/Md-Merazul-Islam/test/blob/main/README2.md)
 
 Enjoy managing your gym efficiently with this system!
