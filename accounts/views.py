@@ -1,12 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer,UserSerializer
 from django.contrib.auth import authenticate, login, logout
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
-
+from .permissions import IsAdmin
+from rest_framework import viewsets
 User = get_user_model()
 
 class RegisterAPIView(generics.CreateAPIView):
@@ -102,3 +103,29 @@ class LogoutAPIView(APIView):
             "message": "Successfully logged out"
         }, status=status.HTTP_200_OK)
 
+
+
+# only access super use or admin 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsAdmin]  
+
+    def perform_update(self, serializer):
+        user = serializer.instance
+        if 'role' in serializer.validated_data and user.role != serializer.validated_data['role']:
+            pass
+        serializer.save()
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        
+        self.perform_update(serializer)
+        return Response({
+            "success": True,
+            "statusCode": status.HTTP_200_OK,
+            "message": "User updated successfully",
+            "data": serializer.data,
+        }, status=status.HTTP_200_OK)

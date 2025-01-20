@@ -44,3 +44,19 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name','phone_number','address']
+        
+        
+        
+# only access super user or admin 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'role', 'phone_number', 'address']
+
+    def update(self, instance, validated_data):
+        role = validated_data.get('role', instance.role)
+        if role != instance.role and not (self.context['request'].user.role == 'admin' or self.context['request'].user.is_superuser):
+            raise serializers.ValidationError("Only admins or superusers can change the role.")
+
+        return super().update(instance, validated_data)
