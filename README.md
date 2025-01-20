@@ -4,39 +4,69 @@ The **Gym Class Scheduling and Membership Management System** is a robust Django
 
 ![image](https://github.com/user-attachments/assets/d86a0b04-3719-40f3-a95e-c59450551cfd)
 
+
 ## Features and Functionality
 
 ### User Roles and Permissions
 
-1. **Admin**:
-   - ✅Create and manage trainers.
-   - ✅Schedule classes (maximum 5 per day).
-   - ✅Assign trainers to schedules.
-   - ✅View all trainers and schedules.
+#### 👤 **User Registration**
+- 🚀 All new users register with the **default role set to None**.
+- 🛠️ Superusers have full control over assigning and managing user roles.
 
-2. **Trainer**:
-   - ✅View assigned class schedules.
-   - ✅Cannot create or manage schedules or trainee profiles.
+---
 
-3. **Trainee**:
-   - ✅Create and manage their own profile.
-   - ✅Book class schedules with available slots (maximum 10 trainees per schedule).
-   - ✅Cancel bookings if needed.
+### 🔑 **Role Management**
 
-## Business Rules
+#### ⭐ **Superuser**
+- **Responsibilities**:
+  - 🔒 Manage roles and grant admin privileges to any user.
+  - ⚙️ Use the [`/accounts/user`](https://gym-class-scheduling-q6cx.vercel.app/accounts/users/) API or admin dashboard for role management.
+- **Access**:
+  - 🛡️ Full access to all features and functionalities.
 
-### Class Scheduling
+#### 👔 **Admin**
+- **Responsibilities**:
+  - 📋 Manage trainers and class schedules.
+  - 🛠️ Perform all administrative tasks.
 
-- ✅Each day is limited to a **maximum of 5 class schedules**.
-- ✅Each class lasts for **2 hours**.
-- ✅A **maximum of 10 trainees per class schedule** is enforced. Once the limit is reached, no further bookings are allowed.
-- ✅Admins handle scheduling and assigning trainers to schedules.
+#### 🧑‍🏫 **Trainer**
+- **Creation**:
+  - Created **only by admin users**.
+  - Requires a valid username or email from an existing active user.
+- **Access**:
+  - 🗓️ View only their assigned class schedules.
+  - ⚠️ Cannot access schedules if the username or email is invalid.
 
-### Booking System
+#### 🧑‍💻 **Trainee**
+- **Default Role**:
+  - All normal users register with this role.
+- **Access**:
+  - 📅 Book **one class per day** based on the available schedule.
 
-- ✅Trainees can book class schedules **if slots are available**.
-- ✅A trainee cannot book **multiple classes in the same time slot**.
-- ✅Bookings can be canceled by trainees if necessary.
+---
+
+### ⚙️ **Business Rules**
+
+#### 📅 **Class Scheduling**
+- 🕒 Each day is limited to a **maximum of 5 class schedules**.
+- ⏳ Each class lasts for **2 hours**.
+- 👥 A **maximum of 10 trainees per class schedule** is enforced.
+- 🛠️ Admins handle scheduling and assigning trainers to schedules.
+
+#### 🏋️ **Booking System**
+- ✅ Trainees can book class schedules **if slots are available**.
+- ❌ Trainees cannot book **multiple classes in the same time slot**.
+- 🔄 Bookings can be canceled by trainees if necessary.
+
+---
+
+
+## Tech Stack
+- **Backend**: Django, Django REST Framework
+- **Database**: PostgreSQL ( Superbase)
+- **Authentication**: JWT-based authentication
+- **Deployment**: Hosted on [vercel](https://vercel.com/)
+---
 
 ## Project Structure
 
@@ -78,25 +108,14 @@ GYM/  # Project Root
 ```
 
 
-## Superuser Credentials
+# 🔐 User Roles and Credentials
 
-- **Username**: `admin`
-- **Password**: `admin1234`
-
-## Admin Credentials
-
-- **Username**: `meraz`
-- **Password**: `meraz2004`
-
-## Trainer Credentials
-
-- **Username**: `sagor`
-- **Email**: `sagor@gmail.com`
-- **Password**: `meraz2004`
-
-## Trainee Credentials
-- **Username**: `sagor`
-- **Password**: `meraz2004`
+| **Role**    | **Username** | **Password**  |
+|-------------|--------------|---------------|
+| **Superuser** | admin      | admin1234     |
+| **Admin**     | meraz      | meraz2004     |
+| **Trainer**   | sagor      | meraz2004     |
+| **Trainee**   | antor      | meraz2004     |
 
 
 ## API Endpoints
@@ -107,6 +126,8 @@ GYM/  # Project Root
 - **Login**: `POST /accounts/login/`
 - **Profile**: `GET /accounts/profile/`
 - **Logout**: `POST /accounts/logout/`
+- **All User**: `POST/GET/PUT/DELETE /accounts/users/`
+- 
 
 ### Admins
 
